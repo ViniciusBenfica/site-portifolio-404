@@ -1,0 +1,22 @@
+.background{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1150px; height: 305px;
+    background-image: url(../public/fundo.png);
+    background-size: 100% 100%;
+    z-index: 1;
+
+    h1{
+        text-align: center;
+        color: rgb(138, 138, 138);
+        font-weight: 600;
+        font-size: 50px;
+        margin-top: 10px;
+    }
+}
+
+@mixin border(){
+    border: solid 1px #616161;
+    border-radius: 10px;
+}

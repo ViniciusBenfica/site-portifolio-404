@@ -1,0 +1,142 @@
+@import './background.module.';
+
+.return{
+    /* position: absolute;
+    left: 50%;
+    transform: translateX(-50%); */
+    @include border();
+    width: 100px; height: 30px;
+    background-color: #1A1A1A;
+    margin-top: -80px;
+    margin-left: 62px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 2;
+    font-weight: 100;
+    color: #616161;
+
+    &:hover{
+        color: #fff
+    }
+}
+
+.item{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    width: 1020px; height: 500px;
+    margin: auto;
+    margin-top: 80px;
+    color: #616161;
+    z-index: 2;
+    background-color: #1A1A1A;
+    @include border();
+    text-align: center;
+    font-size: 16px;
+
+    .video{
+        width: 600px; height: 350px;
+        margin-top: 30px;
+
+        /* :first-child:hover{
+            filter: invert(100%);
+        } */
+
+        .fotoInicial{
+            border-radius: 20px;
+        }
+
+        .photos{
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+
+            img:hover{
+                cursor: pointer;
+            }
+        }
+    }
+
+    .productInfos{
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        width: 330px;
+
+        .buttonBuy{
+            width: 325px; height: 80px;
+            background-color: #161616;
+            @include border();
+            margin: 0 auto;
+            font-size: 26px;
+            line-height: 3;
+
+            &:hover{
+                cursor: pointer;
+                color: #fff;
+            }
+        }
+
+        .description{
+            text-align: start;
+            font-weight: 600;
+            line-height: 1.4;
+            height:230px;
+        }
+
+        .scriptName{
+            font-size: 30px;
+            color: #909090;
+            font-weight: 100;
+        }
+
+        .scriptPrice{
+            font-size: 30px;
+            color: #909090;
+            font-weight: 100;
+        }
+    }
+    
+}
+
+.moreDetails{
+    width: 1020px;
+    margin: auto;
+    margin-top: 50px;
+    color: #616161;
+
+    p{
+        margin-left: 50px;
+    }
+
+    div{
+        font-size: 25px;
+        color: #909090;
+        font-weight: 100;
+        text-align: center;
+
+    }
+
+    iframe{
+        margin-bottom: 50px;
+        margin-top: 30px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .backtoTop{
+        width: 500px;
+        margin: auto;
+        height: 30px;
+        margin-top: 50px;
+        margin-bottom: -50px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        div:hover{
+            cursor: pointer;
+            color: #fff;
+        }
+    }
+}

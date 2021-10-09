@@ -1,0 +1,107 @@
+@import './background.module.';
+
+.body{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1020px; height: auto;
+    margin: auto;
+    margin-top: 80px;
+    color: #616161;
+    z-index: 2;
+
+    .divSelect{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 1030px; height: 50px;
+        background-color: #1D1D1D;
+        z-index: 10;
+        @include border();
+
+        >div {
+            margin: 0 10px;
+        }
+
+        .select{
+            margin-left: 10px;
+            background-color: #1D1D1D;
+            @include border();
+            color: #616161;
+        }
+    }
+
+    .itens{
+        display: grid;
+        background-color: #191919;
+        grid-template-columns: repeat(4, 1fr);
+        row-gap: 10px;
+        width: 1000px; height: auto;
+        padding: 15px;
+        border: solid 1px #616161;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        margin-top: -10px;
+
+        .item{
+            margin-top: 10px;
+            margin-left: 15px;
+
+            text-align: center;
+            width: 220px; height: 230px;
+            font-size: 8px;
+            @include border();
+            background-color: #151515;
+
+            .imageProduct{
+                border-radius: 10px;
+                overflow: hidden;
+                width: 210px; height: 120px;
+                margin: auto;
+                margin-top: 5px;
+                margin-bottom: 10px;
+                /* background-color: red; */
+            }
+
+            img{
+                width: 100%; height: 100%;
+            }
+
+            .nameScript{
+                font-size: 17px;
+                margin: auto;
+                margin-bottom: 5px;
+                width: 90px; height: 25px;
+                line-height: 1.6;
+                border-top: solid 1px #616161;
+                border-bottom: solid 1px #616161;
+            }
+
+            .resume{
+                width: 180px;
+                margin: auto;
+                font-size: 12px;
+            }
+        }
+
+        .scriptDetails{
+            text-align: center;
+            width: 120px; height: 35px;
+            @include border();
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 2.5;
+            margin: auto;
+            background-color: #151515;
+            margin-top: -15px !important;
+
+            &:hover{
+                color: #fff
+            }
+        }
+
+
+    }
+}
+

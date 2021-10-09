@@ -1,0 +1,18 @@
+.bottom{
+    display: flex;
+    align-content: center;
+    margin-top: 100px;
+    width: 100%; height: 180px;
+    color: #fff;
+    background-color: #101010;
+
+
+    .image{
+        justify-content: center;
+        text-align: center;
+        margin: auto;
+        font-size: 8px;
+        padding-top: 15px;
+    }
+    
+}
