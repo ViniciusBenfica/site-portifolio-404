@@ -57,7 +57,7 @@ export default function index({data}: {data: Script[]}){
                                 <div className={styles.nameScript}>{item.price}</div>
                                 <div className={styles.resume}>{item.resume}</div>
                             </div>
-                            <div className={styles.scriptDetails} onClick={() => router.push('/scripts/' + item.name )}>VER SCRIPT</div>
+                            <div className={styles.scriptDetails} onClick={() => router.push('/script/' + item.name )}>VER SCRIPT</div>
                         </div>
                     ))}
                 </div>
