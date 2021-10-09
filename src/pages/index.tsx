@@ -21,7 +21,7 @@ export default function index({data}: {data: Script[]}){
     const [scripts, setScripts] = useState(data)
 
     const filterScript = async (choiceValue) => {
-        const {data} = await api.get(`/script/${choiceValue}`)
+        const {data} = await api.get(`/script/forTime`)
         setScripts(data)
     }
 
