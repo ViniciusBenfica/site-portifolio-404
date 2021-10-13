@@ -2,7 +2,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 1150px; height: 305px;
+    width: 80%; max-width: 1200px; height: 305px;
     background-image: url(../public/fundo.png);
     background-size: 100% 100%;
     z-index: 1;
@@ -19,4 +19,12 @@
 @mixin border(){
     border: solid 1px #616161;
     border-radius: 10px;
+}
+
+
+@media(max-width: 540px){
+    .background h1{
+        font-size: 35px;
+        line-height: 2;
+    }
 }

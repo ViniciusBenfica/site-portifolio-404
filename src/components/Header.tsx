@@ -1,5 +1,4 @@
 import styles from "./styles/Header.module.scss"
-/* import Link from 'next/link' */
 import logo from "../public/icon.png"
 
 import Image from "next/image"

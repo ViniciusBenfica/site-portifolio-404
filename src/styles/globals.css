@@ -6,7 +6,12 @@ html, body{
     background-color: #151515;
     font-family: 'Montserrat', sans-serif;
     color: #fff !important;
+}
 
+@media(max-width: 540px){
+    html, body{
+        font-size: 10px;
+    }
 }
 
 a{
