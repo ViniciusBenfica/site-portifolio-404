@@ -32,7 +32,7 @@ export default function script({data}: {data: Script}){
             <div className={styles.background}>
 
                 <div><h1>DESCRIÇÃO</h1></div>
-                <div onClick={() => {router.back()}} className={styles.return}>VOLTAR</div>
+                {/* <div onClick={() => {router.back()}} className={styles.return}>VOLTAR</div> */}
 
             </div>
 
@@ -49,7 +49,7 @@ export default function script({data}: {data: Script}){
                 <div className={styles.productInfos}>
                     <h1 className={styles.scriptName}>{data.name}</h1>
                     <div className={styles.description}>{data.description}</div>
-                    <h2 className={styles.scriptPrice}>{data.price}</h2>
+                    <div className={styles.scriptPrice}>{data.price}</div>
                     <div onClick={() => router.push(data.discord)} className={styles.buttonBuy}>DISCORD</div>
                 </div>
             </div>
@@ -58,12 +58,14 @@ export default function script({data}: {data: Script}){
 
                 <div>MAIS DETALHES</div>
 
-                <iframe width="830" height="470" src={data.video}></iframe>
+                <iframe src={data.video}></iframe>
                 
-                {data.characteristics.map((item) => (
-                    <p>・{item}</p>
-                ))}
-
+                <div className={styles.characteristics}>
+                    {data.characteristics.map((item) => (
+                        <p>・{item}</p>
+                    ))}
+                </div>
+                
                 <div className={styles.backtoTop}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="19" viewBox="0 0 24 19">
                     <path id="Polígono_3" data-name="Polígono 3" d="M12,0,24,19H0Z" fill="#b4b4b4"/>
