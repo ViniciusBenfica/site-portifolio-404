@@ -107,10 +107,6 @@
     margin-top: 50px;
     color: #616161;
 
-    p{
-        margin-left: 50px;
-    }
-
     div{
         font-size: 25px;
         color: #909090;
@@ -119,7 +115,7 @@
     }
 
     .characteristics{
-        width: 55%;
+        width: 50%;
         margin: auto;
         font-size: 17px;
         text-align: start;
@@ -178,9 +174,7 @@
             width: 25%;
         }
     }
-
     
-
     .moreDetails{
         iframe{
             max-width: 50%;
@@ -198,4 +192,39 @@
     }
 
 
+}
+
+
+@media (max-width: 1024px) {
+    .item{
+        width: 63%;
+        font-size: 12px;
+
+        .video{
+            .photos{
+                display: none;
+            }
+        }
+
+        .scriptName{
+            font-size: 20px !important;
+            margin-top: -90px;
+        }
+    
+        .scriptPrice{
+            font-size: 20px !important;
+        }
+    }
+
+    .moreDetails{
+        .characteristics{
+            font-size: 13px;
+        }
+
+        iframe{
+            height: 250px;
+        }
+    }
+
+    
 }
