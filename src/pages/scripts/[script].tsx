@@ -2,7 +2,7 @@ import router from "next/router"
 
 import styles from "../../styles/script.module.scss"
 import Bottom from '../../components/Bottom'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import {api} from "../../services/api"
 
@@ -10,47 +10,72 @@ import Header from "../../components/Header"
 import { GetStaticPaths, GetStaticProps } from "next"
 
 interface Script{
+    id: number;
     name: string;
-    resumo: string;
     price: string;
-    images: Array<string>;
-    characteristics: [];
-    description: string;
-    video: string;
+    thumbnail: string;
+    image1: string
+    image2: string
+    image3: string
+    image4: string
+    resume: string;
     discord: string;
+    description: string;
+    characteristics: string
+    video: string;
 }
 
 export default function script({data}: {data: Script}){
+    const [fotoInicial, setFotoInicial] = useState(data.image1)
+    const [QRCode, setQRCode] = useState("")
+    const [verPagemento, setVerPagamento] = useState("none")
+    // const [fotoSecundaria, setfotoSecundaria] = useState(data.images)
 
-    const [fotoInicial, setFotoInicial] = useState(data.images[1])
-    const [fotoSecundaria, setfotoSecundaria] = useState(data.images)
+    useEffect(() => {
+        if(QRCode){
+            setVerPagamento("flex")
+        }
+    },[QRCode])
+
+    const buyScript = async () => {
+        const {data} = await api.post("http://localhost:8001/user/buy")
+        setQRCode(data)
+    }
 
     return(
         <div>
             <Header></Header>
-
+            <div style={{display: verPagemento}} className={styles.payment}>
+                <div><img src={QRCode} width={245} height={245}/></div>
+                <div>
+                    <div className={styles.paymentTitle}>PAGAMENTO</div>
+                    <p>Escaneie o qrcode para efetuar o pagamento e receber o download do script.</p>
+                    <p>Valor: {data.price}</p>
+                    <div className={styles.paymentScript}>Compra: Cam System</div>
+                    <div onClick={() => setVerPagamento("none")}>FECHAR</div>
+                </div>
+                
+            </div>
             <div className={styles.background}>
-
                 <div><h1>DESCRIÇÃO</h1></div>
                 {/* <div onClick={() => {router.back()}} className={styles.return}>VOLTAR</div> */}
-
             </div>
-
             <div className={styles.item}>
                 <div className={styles.video}>
                     <img className={styles.fotoInicial} src={fotoInicial} width={600} height={350}/>
                     <div className={styles.photos}>
-                        {fotoSecundaria.map((item) => (
-                            <img onClick={() => setFotoInicial(item)} src={item} width={140} height={80}/>
-                        ))}
+                        <img onClick={() => setFotoInicial(data.image1)} src={data.image1} width={140} height={80}/>
+                        <img onClick={() => setFotoInicial(data.image2)} src={data.image2} width={140} height={80}/>
+                        <img onClick={() => setFotoInicial(data.image3)} src={data.image3} width={140} height={80}/>
+                        <img onClick={() => setFotoInicial(data.image4)} src={data.image4} width={140} height={80}/>
                     </div>
                 </div>
-                
                 <div className={styles.productInfos}>
                     <h1 className={styles.scriptName}>{data.name}</h1>
                     <div className={styles.description}>{data.description}</div>
                     <div className={styles.scriptPrice}>{data.price}</div>
-                    <div onClick={() => router.push(data.discord)} className={styles.buttonBuy}>DISCORD</div>
+                    {/* <div onClick={() => router.push(data.discord)} className={styles.buttonBuy}>COMPRAR</div> */}
+                    <div onClick={() => buyScript()} className={styles.buttonBuy}>COMPRAR</div>
                 </div>
             </div>
 
@@ -58,11 +83,11 @@ export default function script({data}: {data: Script}){
 
                 <div>MAIS DETALHES</div>
 
-                <iframe src={data.video}></iframe>
-                
+                <iframe src={data.video}></iframe> {/* aqui */}
+
                 <div className={styles.characteristics}>
-                    {data.characteristics.map((item) => (
-                        <p>・{item}</p>
+                    {(data.characteristics).split(";").map((item) => (
+                        <p>- {item}</p>
                     ))}
                 </div>
                 
@@ -97,7 +122,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   
 export const getStaticProps: GetStaticProps = async ({params}) => {
     const {data} = await api.get(`/script/${params.script}`)
-
     return{
         props: {data}
     }

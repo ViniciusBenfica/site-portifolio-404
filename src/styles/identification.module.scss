@@ -1,0 +1,97 @@
+@import './background.module.';
+
+.body{
+    position: relative;
+    width: 960px; height: 550px;
+    margin: auto;
+    margin-top: 80px;
+    background-color: #1A1A1A;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    z-index: 2;
+    @include border();
+
+    p{
+        font-size: 19px;
+    }
+
+    > div{
+        width: 50%; height: 100%;
+        /* display: flex; */
+    }
+
+    div div{
+        margin: auto;
+
+        .button{
+            width: 330px; height: 40px;
+            background-color: #303030;
+            color: #616161;
+            text-align: center;
+            font-size: 20px;
+            line-height: 2;
+            margin-top: 20px;
+            @include border();
+
+            &:hover{
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+
+        .passwordAndLogin{
+            display: flex;
+
+            div{
+                color: #616161;
+                font-size: 9px;
+                text-decoration: underline;
+                margin-top: 10px;
+            }
+            
+        }
+
+        .passwordIcon{
+            // position: absolute !important;
+            // margin-left: -15px !important;
+           /*  width: 100px !important; height: 100px !important; */
+            // margin-left: -15px ;
+/*             position: absolute !important;
+            left: 0 !important;
+            bottom: 0 !important; */
+            // background-color: red;
+        }
+    }
+
+    textarea:focus, input:focus, select:focus {
+        box-shadow: 0 0 0 0;
+        outline: 0;
+    } 
+
+    input{
+        text-indent: 10px;
+        width: 330px; height: 40px;
+        background-color: #161616;
+        font-size: 16px;
+        color: #fff;
+        @include border();
+        margin: 10px 0;
+    }
+
+    .wrongData{
+        position: absolute;
+        color: red;
+        // left: 75px;
+        margin-left: 75px;
+        margin-top: -5px;
+    }
+
+    .invalidData{
+        position: absolute;
+        color: red;
+        margin-left: 75px;
+        margin-top: -5px;
+    }
+}
+

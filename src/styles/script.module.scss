@@ -19,6 +19,57 @@
     }
 } */
 
+.payment{
+    width: 550px; height: 250px;
+    padding: 20px 0px;
+    position: fixed;
+    right: 50%; top: 50%;
+    transform: translateX(50%) translateY(-50%);
+    z-index: 50;
+    background-color: #1A1A1A;
+    @include border();
+    display: flex;
+    justify-content: space-around;
+
+    >div{
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        width: 44%; height: 98%;
+        border-radius: 10px;
+        
+        p{
+            font-size: 17px;
+            margin-left: 20px;
+            color: #616161;
+
+        }
+
+        .paymentTitle{
+            width: 95%; height: 35px;
+            text-align: center;
+            line-height: 1.5;
+            font-size: 25px;
+            @include border();
+            margin: auto;
+            background-color: #161616;
+            color: #909090;
+        }
+
+        .paymentScript{
+            width: 95%; height: 35px;
+            text-align: center;
+            line-height: 2;
+            font-size: 15px;
+            @include border();
+            margin: auto;
+            background-color: #161616;
+            color: #909090;
+
+        }
+    }
+}
+
 .item{
     position: relative;
     display: flex;
