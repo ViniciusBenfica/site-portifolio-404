@@ -21,6 +21,8 @@ export default function identification(){
     const [inputWrongColor, setInputWrongColor] = useState("#616161")
     const [erroMessage, setErroMessage] = useState("")
 
+    const [token, setToken] = useState<any>()
+
     function maskCPF(cpf: string){
         cpf=cpf.replace(/\D/g,"")
         cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
@@ -38,14 +40,19 @@ export default function identification(){
     }
 
     const login = async () => {
-        const {data} = await api.post("/user/login", {
+        // const {data} = await api.post("/user/login", {
+        const {data} = await api.post("/auth/auth/login", {
                 email,
                 password
               }
         )
-        
+        // console.log(data)
+
+        setToken(data)
+
         if(data){
             router.push('/')
+            localStorage.setItem("tokenJWT",data.access_token);
         }else{
             setInputWrongColor("red")
             setShowWrongData("block")
@@ -62,7 +69,6 @@ export default function identification(){
                 discord
               }
         )
-
         if(IP.length < 11){
             setErroMessage("IP não disponivel")
             return

@@ -4,8 +4,9 @@ import styles from "./styles/Bottom.module.scss"
 import logo from "../public/icon.png"
 
 import Image from "next/image"
+import { memo } from "react"
 
-export default function Bottom(){
+function Bottom(){
 
     return(
         <div className={styles.bottom}>
@@ -18,3 +19,5 @@ export default function Bottom(){
         </div>
     )
 }
+
+export default memo(Bottom)

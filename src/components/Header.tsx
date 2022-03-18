@@ -7,8 +7,15 @@ import entrar from "../public/entrar.png"
 import Image from "next/image"
 
 import router from "next/router"
+import { memo, useEffect, useState } from "react"
 
-export default function Header(){
+ function Header(){
+
+    const [verifyToken, setVerifyToken] = useState<string>()
+     
+    useEffect(()=> {
+     setVerifyToken(localStorage.getItem('tokenJWT'))
+    })
 
     return(
         <header className={styles.header}>
@@ -16,7 +23,14 @@ export default function Header(){
             <div className={styles.image}>
                 <Image src={discord} width={100} height={100}/>
                 <Image className={styles.logo} src={logo} width={100} height={100}/>
-                <Image onClick={() => router.push('/identification')} src={entrar} width={100} height={100}/>
+                {
+                    verifyToken
+                    
+                    ? <Image onClick={() => router.push('/shoppingCart')} src={entrar} width={100} height={100}/>
+
+                    : <Image onClick={() => router.push('/identification')} src={entrar} width={100} height={100}/>
+
+                }
                 {/* <div>404 DEVELOPMENT</div> */}
             </div>
 
@@ -33,3 +47,5 @@ export default function Header(){
         </header>
     )
 }
+
+export default memo(Header)
