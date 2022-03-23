@@ -18,9 +18,9 @@ interface Script{
 
 export default function index({data}: {data: Script[]}){
     
-    const [scripts, setScripts] = useState(data)
+    const [scripts, setScripts] = useState<Array<Object>>(data)
 
-    const filterScript = async (choiceValue) => {
+    const filterScript = async (choiceValue: string) => {
         const {data} = await api.get(`/script/${choiceValue}`)
         setScripts(data)
     }
@@ -50,7 +50,7 @@ export default function index({data}: {data: Script[]}){
                     </div>
                 </div>
                 <div className={styles.itens}>
-                    {scripts.map((item, index) => (
+                    {scripts.map((item: any, index: number) => (
                         <div key={index}>
                             <div className={styles.item}>
                                 <div className={styles.imageProduct}><img src={item.thumbnail}/></div>

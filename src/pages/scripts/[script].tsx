@@ -26,9 +26,9 @@ interface Script{
 }
 
 export default function script({data}: {data: Script}){
-    const [fotoInicial, setFotoInicial] = useState(data.image1)
-    const [QRCode, setQRCode] = useState("")
-    const [verPagemento, setVerPagamento] = useState("none")
+    const [fotoInicial, setFotoInicial] = useState<string>(data.image1)
+    const [QRCode, setQRCode] = useState<string>("")
+    const [verPagemento, setVerPagamento] = useState<string>("none")
     // const [fotoSecundaria, setfotoSecundaria] = useState(data.images)
 
     useEffect(() => {
@@ -37,9 +37,17 @@ export default function script({data}: {data: Script}){
         }
     },[QRCode])
 
-    const buyScript = async () => {
-        const {data} = await api.post("http://localhost:8001/user/buy")
-        setQRCode(data)
+    async function buyScript(): Promise<void>{
+        try{
+            const {data} = await api.post("http://localhost:8001/user/buy",
+            {data:{}},
+            {headers: {Authorization: `Bearer ${localStorage.getItem('tokenJWT')}` }})
+            setQRCode(data)
+        }catch(Error){
+            localStorage.setItem("tokenJWT","");
+            router.push('/identification')
+            alert('A sessao expirou')
+        }
     }
 
     return(

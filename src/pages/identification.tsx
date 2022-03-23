@@ -10,18 +10,18 @@ import seePassword from "../public/seePassword.png"
 import router from "next/router"
 
 export default function identification(){
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [CPF, setCPF] = useState("")
-    const [IP, setIP] = useState("")
-    const [discord, setDiscord] = useState("")
-    const [showWrongData, setShowWrongData] = useState("none")
-    const [type, setType] = useState("password")
-    const [inputWrongColor, setInputWrongColor] = useState("#616161")
-    const [erroMessage, setErroMessage] = useState("")
+    const [email, setEmail] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
+    const [confirmPassword, setConfirmPassword] = useState<string>("")
+    const [CPF, setCPF] = useState<string>("")
+    const [IP, setIP] = useState<string>("")
+    const [discord, setDiscord] = useState<string>("")
+    const [showWrongData, setShowWrongData] = useState<string>("none")
+    const [type, setType] = useState<string>("password")
+    const [inputWrongColor, setInputWrongColor] = useState<string>("#616161")
+    const [erroMessage, setErroMessage] = useState<string>("")
 
-    const [token, setToken] = useState<any>()
+    const [token, setToken] = useState<string>()
 
     function maskCPF(cpf: string){
         cpf=cpf.replace(/\D/g,"")
@@ -31,7 +31,7 @@ export default function identification(){
         setCPF(cpf)
     }
 
-    function maskIP(ip: any){
+    function maskIP(ip: string){
         ip=ip.replace(/\D/g,"")
         ip=ip.replace(/(\d{3})(\d)/,"$1.$2")
         ip=ip.replace(/(\d{3})(\d)/,"$1.$2")
@@ -39,13 +39,14 @@ export default function identification(){
         setIP(ip)
     }
 
-    const login = async () => {
+    async function login(): Promise<void>{
         // const {data} = await api.post("/user/login", {
-        const {data} = await api.post("/auth/auth/login", {
+            const {data} = await api.post("/auth/auth/login", {
                 email,
                 password
-              }
+            }
         )
+
         // console.log(data)
 
         setToken(data)
@@ -53,21 +54,32 @@ export default function identification(){
         if(data){
             router.push('/')
             localStorage.setItem("tokenJWT",data.access_token);
+            localStorage.setItem("email",parseJwt(data.access_token).email);
         }else{
             setInputWrongColor("red")
             setShowWrongData("block")
         }
     }
 
-    const register = async () => {
+    function parseJwt (token: string) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    
+        return JSON.parse(jsonPayload);
+    };
+
+    async function register(): Promise<void>{
         const {data} = await api.post("/user/create", {
-                email,
-                password,
-                confirmPassword,
-                CPF,
-                IP,
-                discord
-              }
+            email,
+            password,
+            confirmPassword,
+            CPF,
+            IP,
+            discord
+            }
         )
         if(IP.length < 11){
             setErroMessage("IP não disponivel")
@@ -80,8 +92,8 @@ export default function identification(){
             setErroMessage("Email já está em uso")
         }
     }
-    
-    const visiblePassword = () => {
+
+    function visiblePassword(): void{
         type == "password" ? setType("text") : setType("password") 
     }
     
