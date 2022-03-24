@@ -111,10 +111,10 @@ export default function identification(){
                             {/* <Image onClick={() => visiblePassword()} className={styles.passwordIcon} src={seePassword} width={20} height={20}/> */}
                             <div style={{display: showWrongData}} className={styles.wrongData}>Dados invalidos, tente novamente</div>
                             <div onClick={() => login()} className={styles.button}>ENTRAR</div>
-                            <div className={styles.passwordAndLogin}>
+                            {/* <div className={styles.passwordAndLogin}>
                                 <div className={styles.password}>Esqueci minha senha</div>
                                 <div className={styles.login}>Esqueci meu login</div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div>

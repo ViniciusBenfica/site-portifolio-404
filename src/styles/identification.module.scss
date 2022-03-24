@@ -95,3 +95,26 @@
     }
 }
 
+@media (max-width: 1750px) {
+
+    .body{
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        width: 40%;
+        padding-bottom: 50px;
+        padding-top: 20px;
+
+        input{
+            width: 100%;
+        }
+
+        div div{
+            .button{
+                width: 100%;
+                margin-bottom: 40px;
+            }
+        }
+    }
+
+}
