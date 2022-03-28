@@ -23,7 +23,7 @@
 
     div div{
         margin: auto;
-
+        
         .button{
             width: 330px; height: 40px;
             background-color: #303030;
@@ -53,47 +53,49 @@
         }
 
         .passwordIcon{
-            // position: absolute !important;
-            // margin-left: -15px !important;
-           /*  width: 100px !important; height: 100px !important; */
-            // margin-left: -15px ;
-/*             position: absolute !important;
-            left: 0 !important;
-            bottom: 0 !important; */
-            // background-color: red;
+            position: relative;
+            top: 5px;
+            right: 5px;
+            /* margin-top: 10px !important;
+            background-color: red;
+            overflow: visible;
+            top: 0px !important; */
+            // margin-top: -10px !important;
+            // cursor: pointer;
+        }
+
+        textarea:focus, input:focus, select:focus {
+            box-shadow: 0 0 0 0;
+            outline: 0;
+        } 
+
+        input{
+            text-indent: 10px;
+            width: 330px; height: 40px;
+            background-color: #161616;
+            font-size: 16px;
+            color: #fff;
+            @include border();
+            margin: 10px 0;
+        }
+
+        .inputPassword{
+            margin-right: -20px;
+        }
+    
+        .wrongData{
+            color: red;
+            margin-bottom: -5px;
+        }
+    
+        .invalidData{
+            color: red;
+            margin-bottom: -5px;
         }
     }
-
-    textarea:focus, input:focus, select:focus {
-        box-shadow: 0 0 0 0;
-        outline: 0;
-    } 
-
-    input{
-        text-indent: 10px;
-        width: 330px; height: 40px;
-        background-color: #161616;
-        font-size: 16px;
-        color: #fff;
-        @include border();
-        margin: 10px 0;
-    }
-
-    .wrongData{
-        position: absolute;
-        color: red;
-        // left: 75px;
-        margin-left: 75px;
-        margin-top: -5px;
-    }
-
-    .invalidData{
-        position: absolute;
-        color: red;
-        margin-left: 75px;
-        margin-top: -5px;
-    }
+    
 }
+
 
 @media (max-width: 1750px) {
 
@@ -105,15 +107,21 @@
         padding-bottom: 50px;
         padding-top: 20px;
 
-        input{
-            width: 100%;
-        }
-
         div div{
             .button{
                 width: 100%;
                 margin-bottom: 40px;
             }
+
+            input{
+                width: 100%;
+            }
+
+            .inputPassword{
+                margin: 10px auto;
+                margin-bottom: 20px;
+            }
+
         }
     }
 

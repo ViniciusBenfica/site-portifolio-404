@@ -18,7 +18,8 @@ export default function identification(){
     const [discord, setDiscord] = useState<string>("")
     const [showWrongData, setShowWrongData] = useState<string>("none")
     const [type, setType] = useState<string>("password")
-    const [inputWrongColor, setInputWrongColor] = useState<string>("#616161")
+    const [inputWrongColorLogin, setInputWrongColorLogin] = useState<string>("#616161")
+    const [inputWrongColorRegister, setInputWrongColorRegister] = useState<string>("#616161")
     const [erroMessage, setErroMessage] = useState<string>("")
 
     const [token, setToken] = useState<string>()
@@ -40,25 +41,27 @@ export default function identification(){
     }
 
     async function login(): Promise<void>{
-        // const {data} = await api.post("/user/login", {
+        try{
             const {data} = await api.post("/auth/auth/login", {
                 email,
                 password
+                }
+            )
+            setToken(data)
+
+            if(data){
+                router.push('/')
+                localStorage.setItem("tokenJWT",data.access_token);
+                localStorage.setItem("email",parseJwt(data.access_token).email);
+            }else{
+                setInputWrongColorLogin("red")
+                setShowWrongData("block")
             }
-        )
-
-        // console.log(data)
-
-        setToken(data)
-
-        if(data){
-            router.push('/')
-            localStorage.setItem("tokenJWT",data.access_token);
-            localStorage.setItem("email",parseJwt(data.access_token).email);
-        }else{
-            setInputWrongColor("red")
+        }catch(error){
+            setInputWrongColorLogin("red")
             setShowWrongData("block")
         }
+           
     }
 
     function parseJwt (token: string) {
@@ -72,25 +75,34 @@ export default function identification(){
     };
 
     async function register(): Promise<void>{
-        const {data} = await api.post("/user/create", {
-            email,
-            password,
-            confirmPassword,
-            CPF,
-            IP,
-            discord
+        console.log(password.length)
+        try{
+            if(IP.length < 11 || email.length < 1 || password.length < 1 || confirmPassword.length < 1 || discord.length < 1){
+                setInputWrongColorRegister("red")
+                setErroMessage("Dados preenchidos incorretamente")
+                return
             }
-        )
-        if(IP.length < 11){
-            setErroMessage("IP não disponivel")
-            return
-        }
 
-        if(data){
-            router.push('/')
-        }else{
-            setErroMessage("Email já está em uso")
+
+            const {data} = await api.post("/user/create", {
+                email,
+                password,
+                confirmPassword,
+                // CPF,
+                IP,
+                discord
+                }
+            )
+
+            if(data){
+                router.push('/')
+            }else{
+                setErroMessage("Email inválido")
+            }
+        }catch(error){
+            setInputWrongColorRegister("red")
         }
+        
     }
 
     function visiblePassword(): void{
@@ -106,9 +118,9 @@ export default function identification(){
                     <div>
                         <p>JÁ TENHO CADASTRO</p>
                         <div>
-                            <input style={{borderColor: inputWrongColor}} onChange={(e) => setEmail(e.target.value)} placeholder="E-mail"/>
-                            <input style={{borderColor: inputWrongColor}} onChange={(e) => setPassword(e.target.value)} type={type} placeholder="Senha"/>
-                            {/* <Image onClick={() => visiblePassword()} className={styles.passwordIcon} src={seePassword} width={20} height={20}/> */}
+                            <input style={{borderColor: inputWrongColorLogin}} onChange={(e) => setEmail(e.target.value)} placeholder="E-mail"/>
+                            <input className={styles.inputPassword} style={{borderColor: inputWrongColorLogin}} onChange={(e) => setPassword(e.target.value)} type={type} placeholder="Senha"/>
+                            <span className={styles.passwordIcon}><Image onClick={() => visiblePassword()} src={seePassword} width={20} height={20}/></span>
                             <div style={{display: showWrongData}} className={styles.wrongData}>Dados invalidos, tente novamente</div>
                             <div onClick={() => login()} className={styles.button}>ENTRAR</div>
                             {/* <div className={styles.passwordAndLogin}>
@@ -120,12 +132,13 @@ export default function identification(){
                     <div>
                         <p>NÃO TENHO CADASTRO</p>
                         <div>
-                            <input onChange={(e) => setEmail(e.target.value)} placeholder="E-mail"/>
-                            <input value={IP} onChange={(e) => maskIP(e.target.value)} placeholder="IP" maxLength={11}/>
-                            <input onChange={(e) => setPassword(e.target.value)}placeholder="Crie sua senha"/>
-                            <input onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirme sua senha"/>
+                            <input style={{borderColor: inputWrongColorRegister}} onChange={(e) => setEmail(e.target.value)} placeholder="E-mail"/>
                             {/* <input value={CPF} onChange={(e) => maskCPF(e.target.value)} placeholder="CPF" maxLength={14}/> */}
-                            <input onChange={(e) => setDiscord(e.target.value)} placeholder="Discord#0000"/>
+                            <input style={{borderColor: inputWrongColorRegister}} value={IP} onChange={(e) => maskIP(e.target.value)} placeholder="IP" maxLength={11}/>
+                            <input style={{borderColor: inputWrongColorRegister}} onChange={(e) => setDiscord(e.target.value)} placeholder="Discord#0000"/>
+                            <input className={styles.inputPassword} style={{borderColor: inputWrongColorRegister}} onChange={(e) => setPassword(e.target.value)} type={type} placeholder="Crie sua senha"/>
+                            <span className={styles.passwordIcon}><Image onClick={() => visiblePassword()} src={seePassword} width={20} height={20}/></span>
+                            <input style={{borderColor: inputWrongColorRegister}} onChange={(e) => setConfirmPassword(e.target.value)} type={type} placeholder="Confirme sua senha"/>
                             <div className={styles.invalidData}>{erroMessage}</div>
                             <div onClick={() => register()} className={styles.button}>CADASTRAR</div>
                         </div>
