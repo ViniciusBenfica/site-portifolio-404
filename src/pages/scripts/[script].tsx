@@ -2,6 +2,9 @@ import router from "next/router"
 
 import styles from "../../styles/script.module.scss"
 import Bottom from '../../components/Bottom'
+import close from "../../public/close.png"
+import Image from "next/image"
+
 import { useEffect, useState } from "react"
 
 import {api} from "../../services/api"
@@ -56,11 +59,12 @@ export default function script({data}: {data: Script}){
             <div style={{display: verPagemento}} className={styles.payment}>
                 <div><img src={QRCode} width={245} height={245}/></div>
                 <div>
+                    {/* <Image src={close} width={10} height={10}/> */}
+                    <div onClick={() => setVerPagamento("none")}>FECHAR</div> 
                     <div className={styles.paymentTitle}>PAGAMENTO</div>
                     <p>Escaneie o qrcode para efetuar o pagamento e receber o download do script.</p>
                     <p>Valor: {data.price}</p>
                     <div className={styles.paymentScript}>Compra: Cam System</div>
-                    <div onClick={() => setVerPagamento("none")}>FECHAR</div>
                 </div>
                 
             </div>
@@ -129,7 +133,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
   
 export const getStaticProps: GetStaticProps = async ({params}) => {
-    const {data} = await api.get(`/script/${params.script}`)
+    const {data} = await api.get(`/script/name/${params.script}`)
     return{
         props: {data}
     }

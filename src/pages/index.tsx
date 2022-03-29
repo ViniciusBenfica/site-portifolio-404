@@ -21,7 +21,7 @@ export default function index({data}: {data: Script[]}){
     const [scripts, setScripts] = useState<Array<Object>>(data)
 
     const filterScript = async (choiceValue: string) => {
-        const {data} = await api.get(`/script/${choiceValue}`)
+        const {data} = await api.get(`/script/order/${choiceValue}`)
         setScripts(data)
     }
 
@@ -43,7 +43,7 @@ export default function index({data}: {data: Script[]}){
                     <div>
                         <span>ORDERNAS POR: </span>
                         <select onChange={(e) => filterScript(e.target.value)} className={styles.select}>
-                            <option value="forTime">MAIS RECENTE</option>
+                            {/* <option value="forTime">MAIS RECENTE</option> */}
                             <option value="forAlphabetical">ALFABÉTICA</option>
                             <option value="forPrice">PREÇO</option>
                         </select>

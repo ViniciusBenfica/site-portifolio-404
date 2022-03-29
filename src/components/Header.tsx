@@ -22,14 +22,13 @@ import { memo, useEffect, useState } from "react"
         <header className={styles.header}>
 
             <div className={styles.image}>
-                <Image src={discord} width={100} height={100}/>
+                <Image onClick={() => router.push('https://discord.gg/CjbzggEerU')} src={discord} width={100} height={100}/>
                 <Image className={styles.logo} src={logo} width={100} height={100}/>
                 {
-                    verifyToken /* detalhes da conta */
-                    ? <Image src={discord} width={100} height={100}/>
+                    verifyToken
+                    ? <Image onClick={() => router.push('https://discord.gg/CjbzggEerU')} src={discord} width={100} height={100}/>
                     : <Image onClick={() => router.push('/identification')} src={entrar} width={100} height={100}/>
                 }
-                {/* <div>404 DEVELOPMENT</div> */}
             </div>
 
             <div className={styles.bottomHeader}>
