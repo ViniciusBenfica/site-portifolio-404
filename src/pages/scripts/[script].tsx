@@ -31,12 +31,11 @@ interface Script{
 export default function script({data}: {data: Script}){
     const [fotoInicial, setFotoInicial] = useState<string>(data.image1)
     const [QRCode, setQRCode] = useState<string>("")
-    const [verPagemento, setVerPagamento] = useState<string>("none")
-    // const [fotoSecundaria, setfotoSecundaria] = useState(data.images)
+    const [seeQRCode, setSeeQRCode] = useState<string>("none")
 
     useEffect(() => {
         if(QRCode){
-            setVerPagamento("flex")
+            setSeeQRCode("flex")
         }
     },[QRCode])
 
@@ -56,11 +55,11 @@ export default function script({data}: {data: Script}){
     return(
         <div>
             <Header></Header>
-            <div style={{display: verPagemento}} className={styles.payment}>
+
+            <div style={{display: seeQRCode}} className={styles.payment}>
                 <div><img src={QRCode} width={245} height={245}/></div>
                 <div>
-                    {/* <Image src={close} width={10} height={10}/> */}
-                    <div onClick={() => setVerPagamento("none")}>FECHAR</div> 
+                    <img className={styles.buttonClose} onClick={() => setSeeQRCode("none")} src="https://cdn-icons-png.flaticon.com/512/106/106830.png" width={30} height={30}></img>
                     <div className={styles.paymentTitle}>PAGAMENTO</div>
                     <p>Escaneie o qrcode para efetuar o pagamento e receber o download do script.</p>
                     <p>Valor: {data.price}</p>
@@ -70,7 +69,6 @@ export default function script({data}: {data: Script}){
             </div>
             <div className={styles.background}>
                 <div><h1>DESCRIÇÃO</h1></div>
-                {/* <div onClick={() => {router.back()}} className={styles.return}>VOLTAR</div> */}
             </div>
             <div className={styles.item}>
                 <div className={styles.video}>
@@ -86,7 +84,6 @@ export default function script({data}: {data: Script}){
                     <h1 className={styles.scriptName}>{data.name}</h1>
                     <div className={styles.description}>{data.description}</div>
                     <div className={styles.scriptPrice}>{data.price}</div>
-                    {/* <div onClick={() => router.push(data.discord)} className={styles.buttonBuy}>COMPRAR</div> */}
                     <div onClick={() => buyScript()} className={styles.buttonBuy}>COMPRAR</div>
                 </div>
             </div>
@@ -95,7 +92,7 @@ export default function script({data}: {data: Script}){
 
                 <div>MAIS DETALHES</div>
 
-                <iframe src={data.video}></iframe> {/* aqui */}
+                <iframe src={data.video}></iframe>
 
                 <div className={styles.characteristics}>
                     {(data.characteristics).split(";").map((item) => (
@@ -122,7 +119,7 @@ export default function script({data}: {data: Script}){
 export const getStaticPaths: GetStaticPaths = async () => {
     const { data } = await api.get("/script")
 
-    const paths = data.map((item) => {
+    const paths = data.map((item: any) => {
         return {params: {script: item.name}}
     })
 

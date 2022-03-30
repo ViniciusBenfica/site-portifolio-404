@@ -32,11 +32,19 @@
     justify-content: space-around;
 
     >div{
-        display: flex;
-        flex-direction: column;
         overflow: hidden;
         width: 44%; height: 98%;
         border-radius: 10px;
+
+        .buttonClose{
+            position: absolute;
+            right: -5px;
+            top: -5px;
+        }
+
+        Image{
+            background-color: green !important;
+        }
         
         p{
             font-size: 17px;
