@@ -11,22 +11,7 @@ import {api} from "../../services/api"
 
 import Header from "../../components/Header"
 import { GetStaticPaths, GetStaticProps } from "next"
-
-interface Script{
-    id: number;
-    name: string;
-    price: string;
-    thumbnail: string;
-    image1: string
-    image2: string
-    image3: string
-    image4: string
-    resume: string;
-    discord: string;
-    description: string;
-    characteristics: string
-    video: string;
-}
+import { Script } from "../../interfaces/Script"
 
 export default function script({data}: {data: Script}){
     const [fotoInicial, setFotoInicial] = useState<string>(data.image1)

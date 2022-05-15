@@ -9,14 +9,9 @@ import { GetStaticProps } from "next"
 
 import {api} from "../services/api"
 
-interface Script{
-    thumbnail: string;
-    price: string;
-    name: string;
-    resume: string;
-}
+import { ScriptInitial } from "../interfaces/Script"
 
-export default function index({data}: {data: Script[]}){
+export default function index({data}: {data: ScriptInitial[]}){
     
     const [scripts, setScripts] = useState<Array<Object>>(data)
 
